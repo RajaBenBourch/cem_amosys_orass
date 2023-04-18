@@ -46,14 +46,14 @@ public class ClientMapper extends BaseMapper<ClientEntity, ClientDTO>{
     public ClientDTO toClientDto(ClientEntity client){
             ClientDTO clientDto =  new ClientDTO();
             clientDto.setCountry(client.getCountry().getNomCountry());
-            clientDto.setCode_Client(client.getCode_Client());
+            clientDto.setCodeClient(client.getCodeClient());
             clientDto.setFax(client.getFax());
-            clientDto.setId_client(client.getId_client());
-            clientDto.setDate_creat_client(client.getDate_creat_client());
-            clientDto.setEntreprise_Principal(client.getEntreprise_Principal());
+            clientDto.setIdClient(client.getIdClient());
+            clientDto.setDateCreatClient(client.getDateCreatClient());
+            clientDto.setEntreprisePrincipal(client.getEntreprisePrincipal());
             clientDto.setEmail(client.getEmail());
             clientDto.setTeleFixe(client.getTeleFixe());
-            clientDto.setSiteWeb_Entreprise(client.getSiteWeb_Entreprise());
+            clientDto.setSiteWebEntreprise(client.getSiteWebEntreprise());
             return clientDto;
 
     }

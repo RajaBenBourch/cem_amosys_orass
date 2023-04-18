@@ -1,8 +1,6 @@
 package com.example.crm_amosys_orass.mapper;
 
-import com.example.crm_amosys_orass.dto.ClientDTO;
 import com.example.crm_amosys_orass.dto.ContactDTO;
-import com.example.crm_amosys_orass.model.ClientEntity;
 import com.example.crm_amosys_orass.model.ContactEntity;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +26,7 @@ public class ContactMapper extends BaseMapper<ContactEntity, ContactDTO>{
     public ContactEntity toContact(ContactDTO contactDTO){
 
         ContactEntity contact = new ContactEntity();
-        contact.setId_contact(contactDTO.getIdContact());
+        contact.setIdContact(contactDTO.getIdContact());
         contact.setNom(contactDTO.getNomContact());
         contact.setFax(contactDTO.getFax());
         contact.setRole(contactDTO.getRoleContact());
@@ -42,7 +40,7 @@ public class ContactMapper extends BaseMapper<ContactEntity, ContactDTO>{
 
     public ContactDTO toContatcDto(ContactEntity contact){
         ContactDTO contactDTO = new ContactDTO();
-        contactDTO.setIdContact(contact.getId_contact());
+        contactDTO.setIdContact(contact.getIdContact());
         contactDTO.setNomContact(contact.getNom());
         contactDTO.setRoleContact(contact.getRole());
         contactDTO.setEmail(contact.getEmail());

@@ -1,8 +1,5 @@
 package com.example.crm_amosys_orass.dto;
 
-import com.example.crm_amosys_orass.model.ClientEntity;
-import com.example.crm_amosys_orass.model.CountryEntity;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,17 +14,17 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 public class ClientDTO {
-    private Long id_client;
+    private Long idClient;
 
     private  Long idCountry;
-    private String entreprise_Principal;
+    private String entreprisePrincipal;
 
-    private String siteWeb_Entreprise;
+    private String siteWebEntreprise;
 
-    private String nom_Prenom;
+    private String nomPrenom;
 
 
-    private String code_Client;
+    private String codeClient;
 
     private String  fax;
 
@@ -37,7 +34,7 @@ public class ClientDTO {
 
     private String email;
 
-    private Date date_creat_client;
+    private Date dateCreatClient;
 
 
     private String country;

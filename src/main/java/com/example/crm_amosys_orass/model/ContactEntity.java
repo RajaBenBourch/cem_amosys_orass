@@ -18,7 +18,7 @@ public class ContactEntity {
 //Classe Client
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
-    private Long id_contact;
+    private Long idContact;
 
     @Column(name ="nom")
     private String nom;
@@ -37,7 +37,7 @@ public class ContactEntity {
     private Date date;
 
     @ManyToOne
-    @JoinColumn(name="id_client", nullable=false)
+    @JoinColumn(name="idClient", nullable=false)
     ClientEntity client;
 
 }

@@ -2,8 +2,8 @@ package com.example.crm_amosys_orass.controller;
 
 import com.example.crm_amosys_orass.dto.ClientDTO;
 import com.example.crm_amosys_orass.dto.ContactDTO;
-import com.example.crm_amosys_orass.model.ClientEntity;
-import com.example.crm_amosys_orass.servise.impl.ClientServise;
+import com.example.crm_amosys_orass.servise.impl.ClientService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,32 +14,33 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "*")
+@RequiredArgsConstructor
 public class ClientController {
     @Autowired
-    private ClientServise clientServise;
+    private ClientService clientServise;
     @GetMapping("/crm_client_information")
-    public ResponseEntity<List<ClientDTO>>  getAllClient(){
+    public ResponseEntity<List<ClientDTO>>getAllClient(){
         return new ResponseEntity<>(clientServise.getAll(),HttpStatus.OK);
-        /*********************/
-        /**********************/
-    }
-    //getclient
-    @GetMapping("/crm_client_information/{id_client}")
-    public ResponseEntity<ClientDTO> getClientById(@PathVariable long id_client){
-        return new ResponseEntity<>(clientServise.getById(id_client),HttpStatus.OK);
     }
 
-    @GetMapping("/crm_client_contact/{id_client}")
-    public ResponseEntity<List<ContactDTO>> getClientContact(@PathVariable long id_client){
-        return new ResponseEntity<>(clientServise.getContact(id_client),HttpStatus.OK);
+    //getclient
+    @GetMapping("/crm_client_information/{id_client}")
+    public ResponseEntity<ClientDTO> getClientById(@PathVariable long idClient){
+        return new ResponseEntity<>(clientServise.getById(idClient),HttpStatus.OK);
+    }
+
+    @GetMapping("/crm_client_contact/{idClient}")
+    public ResponseEntity<List<ContactDTO>> getClientContact(@PathVariable long idClient){
+        return new ResponseEntity<>(clientServise.getContact(idClient),HttpStatus.OK);
     }
     //save client
-    @GetMapping("/delete_crm_client_contact/{id_contact}")
-    public ResponseEntity<List<ContactDTO>> deleteContact(@PathVariable long id_contact){
-        return new ResponseEntity<>(clientServise.deleteContact(id_contact),HttpStatus.OK);
+    @GetMapping("/delete_crm_client_contact/{idContact}")
+    public ResponseEntity<List<ContactDTO>> deleteContact(@PathVariable long idContact){
+        return new ResponseEntity<>(clientServise.deleteContact(idContact),HttpStatus.OK);
     }
     @PostMapping("/create_crm_client_information")
     public ResponseEntity<List<ClientDTO>> save(@RequestBody ClientDTO client){
+        System.out.println(client);
         clientServise.save(client);
         return new ResponseEntity<>(clientServise.getAll(),HttpStatus.OK);
     }
@@ -53,9 +54,13 @@ public class ClientController {
         return new ResponseEntity<>(clientServise.update(client),HttpStatus.OK);
     }
     //delete country
-    @GetMapping("/delete_crm_client_information/{id_client}")
-    public ResponseEntity<ClientDTO> delete(@PathVariable long id_client){
-        clientServise.delete(id_client);
+    @GetMapping("/delete_crm_client_information/{idClient}")
+    public ResponseEntity<List<ClientDTO>> delete(@PathVariable long idClient){
+        clientServise.delete(idClient);
         return new ResponseEntity<>(HttpStatus.OK);
+
+
+        }
+
     }
-}
+

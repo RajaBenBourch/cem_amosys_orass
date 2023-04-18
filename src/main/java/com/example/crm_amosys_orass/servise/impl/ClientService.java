@@ -12,15 +12,16 @@ import com.example.crm_amosys_orass.repository.ClientRepository;
 import com.example.crm_amosys_orass.repository.ContactRepository;
 import com.example.crm_amosys_orass.repository.CountryRepository;
 import com.example.crm_amosys_orass.utils.IGenericMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Service
-public class ClientServise {
+@RequiredArgsConstructor
+public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
 
@@ -37,8 +38,8 @@ public class ClientServise {
     @Autowired
     private ContactMapper contactMapper;
 
-    public ClientDTO getById(Long id_client) {
-        Optional<ClientEntity> emp = this.clientRepository.findById(id_client);
+    public ClientDTO getById(Long idClient) {
+        Optional<ClientEntity> emp = this.clientRepository.findById(idClient);
         if (emp.isEmpty()){
             throw new ResourceNotFoundException("Country not found for this id ");
         }
@@ -50,8 +51,12 @@ public class ClientServise {
         List<ClientEntity> clients = clientRepository.findAll();
         return clientMapper.ToClientDtos(clients);
     }
-
-
+/*
+    public List<ClientEntity> findAll(){
+        List<ClientEntity> client = clientRepository.findAllByOrderByIdClientAsc();
+        return client;
+    }
+*/
     public void save(ClientDTO client){
         /*if(client.getId_client() != null){
             ClientEntity
@@ -59,8 +64,7 @@ public class ClientServise {
         CountryEntity country = countryRepository.findById(client.getIdCountry()).get();
         if(country == null){
             //throw error
-        }
-        else{
+        } else{
             ClientEntity clientEntity = clientMapper.toClient(client);
             clientEntity.setCountry(country);
             clientRepository.save(clientEntity);
@@ -69,7 +73,7 @@ public class ClientServise {
     }
 
     public ClientDTO update(ClientDTO client){
-        Optional<ClientEntity> emp = this.clientRepository.findById(client.getId_client());
+        Optional<ClientEntity> emp = this.clientRepository.findById(client.getIdClient());
         if (emp.isEmpty()){
             throw new ResourceNotFoundException("Country not found for this id ");
         }
@@ -79,14 +83,14 @@ public class ClientServise {
 
 
 
-    public void  delete(long id_client){
-        this.clientRepository.deleteById(id_client);
+    public void  delete(long idClient){
+        this.clientRepository.deleteById(idClient);
     }
 
-    public List<ContactDTO>  deleteContact(long id_contact){
-        ContactEntity contact = contactRepository.findById(id_contact).get();
-        contactRepository.deleteById(id_contact);
-        return getContact(contact.getClient().getId_client());
+    public List<ContactDTO>  deleteContact(long idContact){
+        ContactEntity contact = contactRepository.findById(idContact).get();
+        contactRepository.deleteById(idContact);
+        return getContact(contact.getClient().getIdClient());
     }
     public List<ContactDTO> getContact(long idClient) {
         Optional<ClientEntity> client = clientRepository.findById(idClient);

@@ -1,11 +1,8 @@
 package com.example.crm_amosys_orass.model;
 
-import com.example.crm_amosys_orass.dto.ClientDTO;
-import com.example.crm_amosys_orass.dto.ContactDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,20 +16,20 @@ import java.util.List;
 @Data
 @Table(name = "crm_client_information")
 public class ClientEntity {
-//Classe Client
+    //Classe Client
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
-    private Long id_client;
+    private Long idClient;
 
     @Column(name ="Entreprise_Principal")
-    private String entreprise_Principal;
+    private String entreprisePrincipal;
     @Column(name ="SiteWeb_Entreprise")
-    private String siteWeb_Entreprise;
+    private String siteWebEntreprise;
     @Column(name ="Nom_Prenom")
-    private String nom_Prenom;
+    private String nomPrenom;
     @Column(name ="Code_Client")
 
-    private String code_Client;
+    private String codeClient;
     @Column(name ="Fax")
     private String  fax;
 
@@ -42,12 +39,20 @@ public class ClientEntity {
     @Column(name ="E_mail")
     private String email;
     @Column(name ="Date_creat_Client")
-    private Date date_creat_client;
+    private Date dateCreatClient;
     @ManyToOne
     @JoinColumn(name = "idCountry")
     private CountryEntity country;
 
     @OneToMany(mappedBy = "client")
     private List<ContactEntity> contacts;
+    /*@ManyToMany
+    @JoinTable(name="user_produit",joinColumns = @JoinColumn(name="id_client"),
+    inverseJoinColumns = @JoinColumn(name = "idProduit"))
+    private List<ProduitEntity> produit;*/
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<FactureEntity> factures;
+
 
 }
