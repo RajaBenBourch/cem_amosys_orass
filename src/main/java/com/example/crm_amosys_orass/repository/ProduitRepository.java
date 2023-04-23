@@ -9,12 +9,19 @@ import java.util.Optional;
 
 @Repository
 public interface ProduitRepository  extends JpaRepository<ProduitEntity, Integer> {
+    Optional<ProduitEntity> findById(Long idProduit);
 
-    Optional<ProduitEntity> findByRef(String ref);
 
-    Optional<ProduitEntity> findByLibelle(String libelle);
+    // Optional<ProduitEntity> findByRef(String ref);
 
-    List<ProduitEntity> findByPrixGreaterThan(BigDecimal value);
+   // Optional<ProduitEntity> findByLibelle(String libelle);
+ //   Optional<ProduitEntity> findByName(String name);
+    //Optional<ProduitEntity> findByChefProduit(String chefProduit);
+   // Optional<ProduitEntity> findByStatu(String statu);
+   // List<ProduitEntity> findByPrixGreaterThan(BigDecimal value);
 
-    int deleteByRef(String ref);
+    //int deleteByRef(String ref);
+
+ //Optional<ProduitEntity> findById(Long idProduit);
+
 }

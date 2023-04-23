@@ -11,7 +11,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class LigneFactureMapper {
+public class LigneFactureMapper {/*
 
     private ProduitRepository produitRepository;
     public LigneFactureEntity toEntity(LigneFactureDTO ligneFactureDto) {
@@ -42,5 +42,5 @@ public class LigneFactureMapper {
             throw new RuntimeException("product not found !!");
         }
         return byRef.get();
-    }
+    }*/
 }

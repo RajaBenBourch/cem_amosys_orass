@@ -12,14 +12,22 @@ import java.util.List;
 @Data
 @Component
 public class ProduitDTO {
-
+    private Integer id;
     @NotBlank
     private String ref;
     @NotBlank
     private String libelle;
-    @NotNull
+    @NotBlank
     private BigDecimal prix;
     @NotNull
     private long quantiteStock;
+    @NotBlank
+    private String name;
+    @NotBlank
+    private String chefProduit;
+    @NotBlank
+    private String statu;
+
+
 
 }

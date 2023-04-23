@@ -4,10 +4,13 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Component
@@ -46,6 +49,10 @@ public class ClientEntity {
 
     @OneToMany(mappedBy = "client")
     private List<ContactEntity> contacts;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date dateAchatP;
     /*@ManyToMany
     @JoinTable(name="user_produit",joinColumns = @JoinColumn(name="id_client"),
     inverseJoinColumns = @JoinColumn(name = "idProduit"))
@@ -55,4 +62,12 @@ public class ClientEntity {
     private List<FactureEntity> factures;
 
 
+
+  /*  @ManyToMany
+    @JoinTable(
+            name = "client_produit",
+            joinColumns = @JoinColumn(name = "idClient"),
+            inverseJoinColumns = @JoinColumn(name = "idProduit"))
+    private Set<ProduitEntity> produits = new HashSet<>();
+*/
 }

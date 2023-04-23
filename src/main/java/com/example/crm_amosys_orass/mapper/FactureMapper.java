@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 @Component
 @RequiredArgsConstructor
-public class FactureMapper {
+public class FactureMapper {/*
     private  ClientRepository clientRepository;
     private  LigneFactureMapper ligneFactureMapper;
 
@@ -46,5 +46,5 @@ public class FactureMapper {
             throw new RuntimeException("Client not found");
         }
         return byCodeClient.get();
-    }
+    }*/
 }

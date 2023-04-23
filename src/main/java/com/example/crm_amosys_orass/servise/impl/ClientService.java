@@ -83,6 +83,8 @@ public class ClientService {
 
 
 
+
+
     public void  delete(long idClient){
         this.clientRepository.deleteById(idClient);
     }

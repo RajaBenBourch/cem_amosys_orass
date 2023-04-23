@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/produits")
@@ -27,28 +29,31 @@ public class ProduitController {
     }
 
 
-    @PostMapping("/")
-    public ProduitDTO save(@Valid @RequestBody ProduitDTO produitDto) {
-        return produitService.save(produitDto);
+
+    @PostMapping("/create_crm_produit_information")
+    public ResponseEntity<List<ProduitDTO>> save(@RequestBody ProduitDTO produitDTO){
+        System.out.println(produitDTO);
+        produitService.save(produitDTO);
+        return new ResponseEntity<>(produitService.findAll(),HttpStatus.OK);
     }
 
-    @GetMapping("/ref/{ref}")
-    public ProduitDTO findByRef(@PathVariable String ref) {
-        return produitService.findByRef(ref);
+
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<ProduitDTO>findById(@PathVariable Integer id){
+        return new ResponseEntity<>(produitService.findById(id),HttpStatus.OK);
     }
 
-    @DeleteMapping("/ref/{ref}")
-    public int delete(@PathVariable String ref) {
-        return produitService.delete(ref);
+
+
+    @PutMapping("/updat_crm_produit_information")
+    public  ResponseEntity<ProduitDTO> update(@RequestBody ProduitDTO produitDto){
+        return new ResponseEntity<>(produitService.update(produitDto),HttpStatus.OK);
+    }
+    @DeleteMapping("/delete_crm_produit_information/{id}")
+    public ResponseEntity<Void> delete(@PathVariable int id){
+        produitService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/")
-    public ProduitDTO update(@Valid @RequestBody ProduitDTO produitDto) {
-        return produitService.update(produitDto);
-    }
-
-    @GetMapping("/")
-    public List<ProduitDTO> findAll() {
-        return produitService.findAll();
-    }
 }

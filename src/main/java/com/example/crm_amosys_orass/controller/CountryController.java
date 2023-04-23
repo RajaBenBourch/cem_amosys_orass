@@ -22,7 +22,6 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 public class CountryController {
    /* @Autowired
-    private CountryRepository countryRepository;
     //get country
  @GetMapping("/get_crm_country_information")
     public List<CountryEntity> getAllCountry(){
@@ -90,6 +89,8 @@ return response;
     public  ResponseEntity<CountryDTO> update(@RequestBody CountryDTO country){
         return new ResponseEntity<>(countryService.update(country),HttpStatus.OK);
     }
+
+
     //delete country
     @DeleteMapping("/delete_crm_country_information/{id_client}")
     public ResponseEntity<Void> delete(@PathVariable long idCountry){
