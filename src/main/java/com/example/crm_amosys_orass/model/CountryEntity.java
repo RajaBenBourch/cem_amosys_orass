@@ -28,6 +28,4 @@ public class CountryEntity {
         private Date dateCreatCountry;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ClientEntity> clients;
-
-
 }

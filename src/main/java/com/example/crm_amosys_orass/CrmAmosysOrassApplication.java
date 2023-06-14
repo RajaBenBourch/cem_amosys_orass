@@ -1,9 +1,7 @@
 package com.example.crm_amosys_orass;
-
-import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+
 
 @SpringBootApplication
 public class CrmAmosysOrassApplication {

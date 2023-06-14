@@ -15,8 +15,6 @@ public class ProduitMapper extends BaseMapper<ProduitEntity, ProduitDTO> {
         super(produit, produitDto);
     }
 
-
-
     public List<ProduitDTO> ToProduitDtos(List<ProduitEntity> produits) {
         List<ProduitDTO> dtos = new ArrayList<>();
         for (ProduitEntity produit: produits) {
@@ -24,40 +22,25 @@ public class ProduitMapper extends BaseMapper<ProduitEntity, ProduitDTO> {
             dtos.add(dto);
         }
         return dtos;
-
     }
-
-
-
-
-    public ProduitDTO toProduitDTO(ProduitEntity produit){
+    public static ProduitDTO toProduitDTO(ProduitEntity produit){
         ProduitDTO produitDto =new ProduitDTO();
         produitDto.setId(produit.getId());
-        produitDto.setPrix(produit.getPrix());
         produitDto.setChefProduit(produit.getChefProduit());
         produitDto.setRef(produit.getRef());
         produitDto.setStatu(produit.getStatu());
         produitDto.setName(produit.getName());
         produitDto.setLibelle(produit.getLibelle());
-
-
+        produitDto.setDescription(produit.getDescription());
         return produitDto;
-
     }
-
-
-
-
 
     public ProduitEntity toProduit(ProduitDTO produitDTO){
         //ProduitEntity produit = new ProduitEntity();
        // produit.setChefProduit(produitDTO.getChefProduit());
         //produit.setName(produitDTO.getName());
-
-
         ProduitEntity produit= toEntity(produitDTO);
         return produit;
     }
-
 
 }

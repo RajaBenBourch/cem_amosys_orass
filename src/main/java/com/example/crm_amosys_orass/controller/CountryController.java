@@ -80,7 +80,6 @@ return response;
         return new ResponseEntity<>(countryService.getById(idCountry),HttpStatus.OK);
     }
     //save client
-
     @PostMapping("/create_crm_country_information")
     public ResponseEntity<CountryDTO> save(@RequestBody CountryDTO country){
         return new ResponseEntity<>(countryService.save(country),HttpStatus.OK);
@@ -89,12 +88,11 @@ return response;
     public  ResponseEntity<CountryDTO> update(@RequestBody CountryDTO country){
         return new ResponseEntity<>(countryService.update(country),HttpStatus.OK);
     }
-
-
     //delete country
     @DeleteMapping("/delete_crm_country_information/{id_client}")
     public ResponseEntity<Void> delete(@PathVariable long idCountry){
         countryService.delete(idCountry);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }

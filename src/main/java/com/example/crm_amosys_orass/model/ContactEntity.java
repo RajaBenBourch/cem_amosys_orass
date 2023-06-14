@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.Date;
-
 @Entity
 @Component
 @AllArgsConstructor
@@ -39,5 +37,4 @@ public class ContactEntity {
     @ManyToOne
     @JoinColumn(name="idClient", nullable=false)
     ClientEntity client;
-
 }

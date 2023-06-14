@@ -1,27 +1,23 @@
 package com.example.crm_amosys_orass.repository;
+import com.example.crm_amosys_orass.model.ClientEntity;
 import com.example.crm_amosys_orass.model.ProduitEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.stereotype.Repository;
-
-import java.math.BigDecimal;
+import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
-import java.util.Optional;
-
 @Repository
-public interface ProduitRepository  extends JpaRepository<ProduitEntity, Integer> {
-    Optional<ProduitEntity> findById(Long idProduit);
-
-
+public interface ProduitRepository  extends JpaRepository<ProduitEntity, Long> {
+    @RestResource(path = "byId/{id}")
+    public ProduitEntity findProduitEntitiesById(@PathVariable("id") Long id );
     // Optional<ProduitEntity> findByRef(String ref);
-
-   // Optional<ProduitEntity> findByLibelle(String libelle);
- //   Optional<ProduitEntity> findByName(String name);
+    List<ProduitEntity>findByNameContaining(String name);
+    // Optional<ProduitEntity> findByLibelle(String libelle);
+    //Optional<ProduitEntity> findByName(String name);
     //Optional<ProduitEntity> findByChefProduit(String chefProduit);
    // Optional<ProduitEntity> findByStatu(String statu);
    // List<ProduitEntity> findByPrixGreaterThan(BigDecimal value);
-
-    //int deleteByRef(String ref);
-
+    // int deleteByRef(String ref);
  //Optional<ProduitEntity> findById(Long idProduit);
 
 }

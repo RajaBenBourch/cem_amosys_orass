@@ -5,19 +5,16 @@ import com.example.crm_amosys_orass.model.ClientEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Component
 public class ClientMapper extends BaseMapper<ClientEntity, ClientDTO>{
-
-
     public ClientMapper(ClientEntity client, ClientDTO clientDto) {
         super(client, clientDto);
     }
-
-    /*public ClientToClientDTO(ModelMapper modelMapper) {
-                    super(modelMapper);
-                }*/
+    /* public ClientToClientDTO(ModelMapper modelMapper) {
+                    super(modelMapper);}*/
     public List<ClientDTO> ToClientDtos(List<ClientEntity> clients) {
         List<ClientDTO> dtos = new ArrayList<>();
         for (ClientEntity client: clients) {
@@ -29,7 +26,7 @@ public class ClientMapper extends BaseMapper<ClientEntity, ClientDTO>{
 
     public ClientEntity toClient(ClientDTO clientDTO){
         /*ClientEntity client = new ClientEntity();
-       client.setNom_Prenom(clientDTO.getNom_Prenom());
+        client.setNom_Prenom(clientDTO.getNom_Prenom());
         client.setId_client(client.getId_client());
         client.setCountry(client.getCountry());
         client.setDate_creat_client(client.getDate_creat_client());
@@ -54,6 +51,21 @@ public class ClientMapper extends BaseMapper<ClientEntity, ClientDTO>{
             clientDto.setEmail(client.getEmail());
             clientDto.setTeleFixe(client.getTeleFixe());
             clientDto.setSiteWebEntreprise(client.getSiteWebEntreprise());
+            clientDto.setChifreDaffir(client.getChifreDaffir());
+            clientDto.setRegisterCommercial(client.getRegisterCommercial());
+            clientDto.setLinkdin(client.getLinkdin());
+            clientDto.setNombreEmploye(client.getNombreEmploye());
+            clientDto.setIdClient(client.getIdClient());
+           clientDto.setDateAgrement(client.getDateAgrement());
+
+        // Convert the binary logo to Base64 and set it in the DTO
+        if (client.getLogo() != null) {
+            byte[] logoBytes = client.getLogo().getFils();
+            if(logoBytes != null) {
+                String base64Logo = Base64.getEncoder().encodeToString(logoBytes);
+                clientDto.setLogo(base64Logo);
+            }
+        }
             return clientDto;
 
     }

@@ -1,33 +1,22 @@
 package com.example.crm_amosys_orass.servise.impl;
-
-
-import com.example.crm_amosys_orass.dto.ClientDTO;
 import com.example.crm_amosys_orass.dto.ProduitDTO;
 import com.example.crm_amosys_orass.mapper.ProduitMapper;
-import com.example.crm_amosys_orass.model.ClientEntity;
-import com.example.crm_amosys_orass.model.CountryEntity;
 import com.example.crm_amosys_orass.model.ProduitEntity;
 import com.example.crm_amosys_orass.repository.ProduitRepository;
 import com.example.crm_amosys_orass.utils.IGenericMapper;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class ProduitService{    /************/
 @Autowired
 private ProduitRepository produitRepository;
-
     @Autowired
     private ProduitMapper produitMapper;
-
     @Autowired
     private IGenericMapper iGenericMapper;
 
@@ -38,11 +27,10 @@ private ProduitRepository produitRepository;
 
         //return iGenericMapper.map(clientRepository.save(iGenericMapper.map(client, ClientEntity.class)),ClientDTO.class);
     }
-
-
     //@Transactional
 
-  //  public int delete(String ref) {
+  //
+    // public int delete(String ref) {
         //return produitRepository.deleteByRef(ref);
   //  }
 
@@ -67,13 +55,11 @@ private ProduitRepository produitRepository;
 
     private void update(ProduitEntity produitEntity, ProduitDTO produitDto) {
         produitEntity.setLibelle(produitDto.getLibelle());
-        produitEntity.setPrix(produitDto.getPrix());
-        produitEntity.setQuantiteStock(produitDto.getQuantiteStock());
     }
 
 
-    public ProduitDTO findById(Integer id) {
-        ProduitEntity produitEntity = produitRepository.findById(id).orElse(null);
+    public ProduitDTO findProduitEntitiesById(Long id) {
+        ProduitEntity produitEntity = produitRepository.findProduitEntitiesById(id);
         if (produitEntity == null) return null;
         return iGenericMapper.map(produitEntity, ProduitDTO.class);
     }
@@ -86,7 +72,7 @@ private ProduitRepository produitRepository;
         List<ProduitEntity> produits = produitRepository.findAll();
         return produitMapper.ToProduitDtos(produits);
     }
-    public void  delete(Integer id){
+    public void  delete(Long id){
         this.produitRepository.deleteById(id);
     }
 

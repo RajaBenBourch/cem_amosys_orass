@@ -9,8 +9,6 @@ import java.util.List;
 
 @Component
 public class ContactMapper extends BaseMapper<ContactEntity, ContactDTO>{
-
-
     public ContactMapper(ContactEntity contact, ContactDTO contactDto) {
         super(contact, contactDto);
     }
@@ -47,9 +45,6 @@ public class ContactMapper extends BaseMapper<ContactEntity, ContactDTO>{
         contactDTO.setFax(contact.getFax());
         contactDTO.setTelephone(contact.getTeleFixe());
         return contactDTO;
-
-
-
 
     }
 }

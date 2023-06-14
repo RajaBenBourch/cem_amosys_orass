@@ -1,54 +1,60 @@
 package com.example.crm_amosys_orass.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "produits")
 @Component
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Table(name = "crm_produit_information")
 public class ProduitEntity{
-
-    /**
-     *
-     */
-    private static final long serialVersionUID = -7275079172834495736L;
-
-
     @Id
     @GeneratedValue
-            private Integer id;
-    @Column(nullable = false)
+    private Long id;
     private String libelle;
-    @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
     private String chefProduit;
-    @Column(nullable = false)
     private String statu;
-    @Column(nullable=false)
     private String 	ref;
-    @Column(nullable = false)
-    private BigDecimal prix;
-    @Column(nullable = false)
-    private double quantiteStock;
-    /*@ManyToMany(mappedBy = "")
-    private Set<ClientEntity> clients = new HashSet<>();*/
+    private String 	Description;
+    private Long idclient;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date dateAchatP;
+    /*@ManyToOne
+    @JoinColumn(name="idClient", nullable=false)
+    ClientEntity client;*/
 
 
-    /*@OneToMany(mappedBy = "produit",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<LigneFactureEntity> ligneFactures;*/
+    @OneToMany(mappedBy = "produit")
+    private List<ProduitClientEntity> clients;
+    private byte[] liste;
+
+
+    @OneToMany(mappedBy = "produits")
+    List<DocumentationEntity> documents;
+
+     @OneToMany(mappedBy = "produit")
+     private List<ProduitOpportuniterEntity> opportunites;
+  /* @ManyToMany(mappedBy = "products")
+   private Set<OpportuniteEntity> opportunities = new HashSet<>();*/
+
+
+
+
 
 
 }

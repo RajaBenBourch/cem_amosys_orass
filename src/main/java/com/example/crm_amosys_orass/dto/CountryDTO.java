@@ -27,6 +27,6 @@ public class CountryDTO {
     private Date dateCreatCountry;
 
 
-    private Set<ClientEntity> clients;
+    private String clients;
 
 }
