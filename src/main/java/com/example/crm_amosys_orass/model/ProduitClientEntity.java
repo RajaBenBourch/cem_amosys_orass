@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -15,19 +16,16 @@ import java.util.Date;
 @NoArgsConstructor
 @Table(name = "crm_client_produit")
 public class ProduitClientEntity {
-
-
     @Id
     @GeneratedValue
     private Long idProduitClient;
-
     private String PrixAchatProduit;
-    private Date dateAchatP;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dateAchatP;
     @ManyToOne
     @JoinColumn(name="idClient")
     ClientEntity client;
-
     @ManyToOne
     @JoinColumn(name="id")
     ProduitEntity produit;

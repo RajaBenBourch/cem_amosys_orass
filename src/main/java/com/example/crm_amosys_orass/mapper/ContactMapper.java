@@ -30,7 +30,7 @@ public class ContactMapper extends BaseMapper<ContactEntity, ContactDTO>{
         contact.setRole(contactDTO.getRoleContact());
         contact.setTeleFixe(contactDTO.getTelephone());
         contact.setEmail(contactDTO.getEmail());
-        contact.setDate(contactDTO.getDateCreate());
+        contact.setDateCreate(contactDTO.getDateCreate());
 
 
         return contact;

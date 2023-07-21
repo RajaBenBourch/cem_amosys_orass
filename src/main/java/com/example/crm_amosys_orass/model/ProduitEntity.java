@@ -31,30 +31,20 @@ public class ProduitEntity{
     private String 	ref;
     private String 	Description;
     private Long idclient;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
-    private Date dateAchatP;
+    //@DateTimeFormat(pattern = "yyyy-MM-dd")
+    //@Temporal(TemporalType.DATE)
+   // private Date dateAchatP;
     /*@ManyToOne
     @JoinColumn(name="idClient", nullable=false)
     ClientEntity client;*/
-
-
     @OneToMany(mappedBy = "produit")
     private List<ProduitClientEntity> clients;
     private byte[] liste;
-
-
     @OneToMany(mappedBy = "produits")
     List<DocumentationEntity> documents;
-
      @OneToMany(mappedBy = "produit")
      private List<ProduitOpportuniterEntity> opportunites;
   /* @ManyToMany(mappedBy = "products")
    private Set<OpportuniteEntity> opportunities = new HashSet<>();*/
-
-
-
-
-
 
 }

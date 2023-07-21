@@ -15,18 +15,12 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 public class CountryDTO {
-
     private long idCountry;
-
+    private long idVille;
+    private String villes;
     private String nomCountry;
-
-
     private String codePostal;
-
-
     private Date dateCreatCountry;
 
-
-    private String clients;
 
 }

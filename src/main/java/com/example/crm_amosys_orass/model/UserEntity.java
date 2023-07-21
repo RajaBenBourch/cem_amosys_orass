@@ -12,24 +12,18 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "crm_User")
 public class UserEntity {
-
     @Id
     @GeneratedValue
-
     private Long idUser;
-
     private String nom;
-
     private String Prenom;
-
     private String cni;
     @Column(nullable=false, unique=true)
     private String email;
     private String password;
     @OneToMany(mappedBy = "user")
     private List<OpportuniteEntity>opprtunity;
-
-
-
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ClientEntity> clients;
 
 }

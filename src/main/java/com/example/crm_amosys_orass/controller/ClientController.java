@@ -4,7 +4,7 @@ import com.example.crm_amosys_orass.mapper.ProduitClientMapper;
 import com.example.crm_amosys_orass.mapper.ProduitMapper;
 import com.example.crm_amosys_orass.model.*;
 import com.example.crm_amosys_orass.repository.ClientRepository;
-import com.example.crm_amosys_orass.repository.ProduitClientEntityRepository;
+import com.example.crm_amosys_orass.repository.ProduitClientRepository;
 import com.example.crm_amosys_orass.repository.ProduitRepository;
 import com.example.crm_amosys_orass.servise.impl.ClientService;
 import com.example.crm_amosys_orass.servise.impl.ProduitService;
@@ -34,7 +34,7 @@ public class ClientController {
     @Autowired
     private ProduitService produitService;
     @Autowired
-    private ProduitClientEntityRepository produitClientEntityRepository;
+    private ProduitClientRepository produitClientEntityRepository;
     @Autowired
     private ClientRepository clientRepository;
     @Autowired
@@ -46,22 +46,25 @@ public class ClientController {
         return new ResponseEntity<>(clientServise.getAll(),HttpStatus.OK);
 
     }*/
+
+
     public ResponseEntity<List<ClientDTO>> getAllClient(@RequestParam(required = false) String keyword) {
         List<ClientDTO> clients;
         if (keyword != null && !keyword.isEmpty()) {
             clients = clientServise.searchClients(keyword);
+            return new ResponseEntity<>(clients, HttpStatus.OK);
         } else {
             clients = clientServise.getAll();
+            return new ResponseEntity<>(clients, HttpStatus.OK);
         }
-        return new ResponseEntity<>(clients, HttpStatus.OK);
     }
+
 
     //getclient
     @GetMapping("/crm_client_information/{id_client}")
     public ResponseEntity<ClientDTO> getClientById(@PathVariable long idClient){
         return new ResponseEntity<>(clientServise.getById(idClient),HttpStatus.OK);
     }
-
     @GetMapping("/crm_client_contact/{idClient}")
     public ResponseEntity<List<ContactDTO>> getClientContact(@PathVariable long idClient){
         return new ResponseEntity<>(clientServise.getContact(idClient),HttpStatus.OK);
@@ -72,16 +75,16 @@ public class ClientController {
         return new ResponseEntity<>(clientServise.deleteContact(idContact),HttpStatus.OK);
     }
     @PostMapping("/create_crm_client_information")
-    public ResponseEntity<List<ClientDTO>> save(@RequestBody ClientDTO client ,String keyword) {
-        System.out.println(client);
+    public ResponseEntity<List<ClientDTO>> save(@RequestBody ClientDTO client) {
         clientServise.save(client);
         return new ResponseEntity<>(clientServise.getAll(),HttpStatus.OK);
     }
     @PostMapping (path = "affectation-produit-client")
     public List<ProduitDTO> listeproduitToClient (@RequestBody ProduitClientDTO achat){
-        ClientEntity client = clientRepository.findClientEntityByIdClient(achat.getIdClient());
+        ClientEntity client = clientRepository.findById(achat.getIdClient()).get();
         ProduitEntity p = produitRepository.findProduitEntitiesById(achat.getId());
         ProduitClientEntity produitClientEntity = new ProduitClientEntity();
+        produitClientEntity.setIdProduitClient(achat.getIdProduitClient());
         produitClientEntity.setClient(client);
         produitClientEntity.setProduit(p);
         produitClientEntity.setDateAchatP(new Date());
@@ -92,23 +95,14 @@ public class ClientController {
     @GetMapping (path = "/produitsByClient/{idC}")
     public List<ProduitDTO> getproduitByClient(@PathVariable Long idC) {
         List<ProduitDTO> produitsList = new ArrayList();
-        Optional<ClientEntity> clientOp=clientRepository.findById(idC);
+        Optional<ClientEntity> clientOp = clientRepository.findById(idC);
         ClientEntity client = clientOp.get();
-        ProduitClientEntity produitClientEntity;
-        List<ProduitClientEntity> produitClientEntities = client.getProduits();
-        ProduitEntity produit ;
-        ProduitClientEntity p;
         for (ProduitClientEntity produitclint: client.getProduits()) {
-            p = null;
-            for(int i = 0; i < produitClientEntities.size(); i++){
-                if(produitClientEntities.get(i).getClient().getIdClient() == idC){
-                    p = produitClientEntities.get(i);
-                    break;
-                }
-            }
             ProduitDTO dto = produitMapper.toProduitDTO(produitclint.getProduit());
-            dto.setDateAchatP(p.getDateAchatP());
-            dto.setPrixAchatProduit(p.getPrixAchatProduit());
+            dto.setDateAchatP(produitclint.getDateAchatP());
+            dto.setPrixAchatProduit(produitclint.getPrixAchatProduit());
+            dto.setIdProduitClient(produitclint.getIdProduitClient());
+            dto.setIdClient(produitclint.getClient().getIdClient());
             produitsList.add(dto);
         }
         return  produitsList;
@@ -166,6 +160,14 @@ public class ClientController {
     }*/
 
 
+    @GetMapping("/metaData/{idClient}")
+    public ResponseEntity<ClientDTO> getClientWithMetaData(@PathVariable("idClient") Long idClient) {
+        ClientDTO clientDTO = clientServise.getClientWithMetaData(idClient);
+        return ResponseEntity.ok(clientDTO);
 
+    }
 }
+
+
+
 

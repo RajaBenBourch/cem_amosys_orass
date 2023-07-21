@@ -44,12 +44,25 @@ public class EtapeService {
         this.etapeRepository = etapeRepository;
         this.etapeMapper = etapeMapper;
     }
-
-    public EtapeDTO createEtape(EtapeDTO dto) {
+  /*  public EtapeDTO createEtape(EtapeDTO dto) {
         EtapeEntity entity = etapeMapper.toEntity(dto);
         entity = etapeRepository.save(entity);
         return etapeMapper.toEtapDto(entity);
+    }*/
+
+
+    public EtapeDTO createEtape(EtapeDTO dto) {
+        try {
+            EtapeEntity entity = etapeMapper.toEntity(dto);
+            entity = etapeRepository.save(entity);
+            return etapeMapper.toEtapDto(entity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e; // or handle the exception as needed
+        }
     }
+
+
     public EtapeDTO getEtapeById(Long id) {
         Optional<EtapeEntity> etapeOptional = etapeRepository.findById(id);
         return etapeOptional.map(etapeMapper::toEtapDto).orElse(null);
@@ -96,8 +109,6 @@ public class EtapeService {
         opportunityRepository.deleteById(idOpportunity);
         return getOpportunite(opportunite.getEtape().getIdEtape());
     }
-
-
     public void mergeOpp(OpportunityDTO opportunityDTO) {
         EtapeEntity etape = etapeRepository.findById(opportunityDTO.getIdEtape()).get();
         OpportuniteEntity opportunite = opportunityMapper.toEntity(opportunityDTO);
@@ -108,8 +119,5 @@ public class EtapeService {
         etape.setOpportunite(opportuniteEntities);
         etapeRepository.save(etape);
     }
-
-
     ////////////////////
-
 }

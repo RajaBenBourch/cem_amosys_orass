@@ -1,15 +1,21 @@
 package com.example.crm_amosys_orass.mapper;
 
 import com.example.crm_amosys_orass.dto.ClientDTO;
+import com.example.crm_amosys_orass.dto.MetaDataDto;
 import com.example.crm_amosys_orass.model.ClientEntity;
+import com.example.crm_amosys_orass.model.MetaData;
+import com.example.crm_amosys_orass.repository.ClientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class ClientMapper extends BaseMapper<ClientEntity, ClientDTO>{
+
+    @Autowired
+    private MetaDataMapper  metaDataMapper;
     public ClientMapper(ClientEntity client, ClientDTO clientDto) {
         super(client, clientDto);
     }
@@ -56,17 +62,23 @@ public class ClientMapper extends BaseMapper<ClientEntity, ClientDTO>{
             clientDto.setLinkdin(client.getLinkdin());
             clientDto.setNombreEmploye(client.getNombreEmploye());
             clientDto.setIdClient(client.getIdClient());
-           clientDto.setDateAgrement(client.getDateAgrement());
-
+            clientDto.setDateAgrement(client.getDateAgrement());
+            clientDto.setBronche(client.getBronche().getNomBronche());
+            clientDto.setUser(client.getUser().getNom());
         // Convert the binary logo to Base64 and set it in the DTO
         if (client.getLogo() != null) {
             byte[] logoBytes = client.getLogo().getFils();
             if(logoBytes != null) {
                 String base64Logo = Base64.getEncoder().encodeToString(logoBytes);
                 clientDto.setLogo(base64Logo);
+                clientDto.setIdLogo(client.getLogo().getIdLogo());
             }
         }
+
+
             return clientDto;
 
     }
+
+
 }

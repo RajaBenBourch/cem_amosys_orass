@@ -11,5 +11,5 @@ import java.util.Optional;
 @Repository
 public interface LogoRepository extends JpaRepository<LogoEntity,Long> {
     Optional<LogoEntity> findByName(String fileName);
-    List<DocumentationEntity> findByClient(ClientEntity client);
+    //List<DocumentationEntity> findByClient(ClientEntity client);
 }

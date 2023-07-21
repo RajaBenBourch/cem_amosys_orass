@@ -40,6 +40,7 @@ public class OpportunityMapper extends BaseMapper<EtapeEntity, EtapeDTO> {
         dto.setStatu(opportunity.getStatu());
         dto.setIdUser(opportunity.getUser().getIdUser());
        dto.setClient(opportunity.getClient().getEntreprisePrincipal());
+
        dto.setEtape(opportunity.getEtape().getName());
 
        // dto.setEtape(Collections.singletonList(opportunity.getEtape().getName()));

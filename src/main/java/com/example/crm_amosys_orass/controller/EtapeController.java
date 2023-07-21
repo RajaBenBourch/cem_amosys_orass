@@ -23,11 +23,26 @@ public class EtapeController {
     public ResponseEntity<List<EtapeDTO>>getAllEtap(){
         return new ResponseEntity<>(etapeService.getAll(),HttpStatus.OK);
     }
-    @PostMapping("/Etape")
+   /* @PostMapping("/Etape")
     public ResponseEntity<EtapeDTO>createEtape(@RequestBody EtapeDTO dto) {
         EtapeDTO createdDto = etapeService.createEtape(dto);
         return new ResponseEntity<>(createdDto, HttpStatus.CREATED);
     }
+*/
+
+
+    @PostMapping("/Etape")
+    public ResponseEntity<List<EtapeDTO>> createEtape(@RequestBody EtapeDTO dto) {
+        try {
+            EtapeDTO createdDto = etapeService.createEtape(dto);
+            return new ResponseEntity<>(etapeService.getAll(),HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     @GetMapping("/{id}")
     public ResponseEntity<EtapeDTO> getEtape(@PathVariable Long idEtape) {
         EtapeDTO dto = etapeService.getEtapeById(idEtape);
@@ -74,6 +89,7 @@ public class EtapeController {
     }
     @GetMapping("/crm_etape_etapeOpp/{idEtape}")
     public ResponseEntity<List<OpportunityDTO>> getOpportunite(@PathVariable long idEtape){
+
 
         return new ResponseEntity<>(etapeService.getOpportunite(idEtape),HttpStatus.OK);
     }

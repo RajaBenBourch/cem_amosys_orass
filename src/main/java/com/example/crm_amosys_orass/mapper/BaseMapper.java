@@ -1,22 +1,15 @@
 package com.example.crm_amosys_orass.mapper;
-
 import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Component;
-
 public class BaseMapper<Entity, DTO> {
-
     private final Entity entity;
     private final DTO dto;
-
     public BaseMapper(Entity entity, DTO dto) {
         this.entity = entity;
         this.dto = dto;
     }
-
     Entity createEntity() throws InstantiationException, IllegalAccessException {
         return entity;
     }
-
     DTO createDTO() throws InstantiationException, IllegalAccessException {
         return dto;
     }

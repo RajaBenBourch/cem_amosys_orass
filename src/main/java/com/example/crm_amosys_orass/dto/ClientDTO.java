@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.time.LocalDate;
+import java.util.List;
 @Component
 @Builder
 @AllArgsConstructor
@@ -13,7 +14,9 @@ import java.time.LocalDate;
 public class ClientDTO {
     private Long idClient;
     private  Long idCountry;
-    private  Long id;
+    private  Long idLogo;
+    private Long idUser;
+    private long idBronch;
     private String entreprisePrincipal;
     private String siteWebEntreprise;
     private String nomPrenom;
@@ -23,6 +26,8 @@ public class ClientDTO {
     private String email;
     private LocalDate dateCreatClient;
     private String country;
+    private String user;
+    private String bronche;
     private String produits;
     private Long idproduit;
     private String linkdin;
@@ -31,4 +36,6 @@ public class ClientDTO {
     private String nombreEmploye;
     private LocalDate dateAgrement;
     private String logo;
+    private List<MetaDataDto> metaData;
+
 }

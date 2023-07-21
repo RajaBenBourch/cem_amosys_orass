@@ -2,26 +2,17 @@ package com.example.crm_amosys_orass.controller;
 
 import com.example.crm_amosys_orass.dto.*;
 import com.example.crm_amosys_orass.mapper.OpportunityMapper;
-
 import com.example.crm_amosys_orass.model.*;
-
 import com.example.crm_amosys_orass.servise.impl.OpportunityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/api/opportunities")
-
-
 @RequiredArgsConstructor
 public class OpportunityController {
     @Autowired
@@ -68,7 +59,7 @@ public class OpportunityController {
     }
     //
 
-    @GetMapping("/{opportunityId}")
+    @GetMapping("/opp/{opportunityId}")
     public ResponseEntity<OpportunityDTO> getOpportunityWithProducts(@PathVariable Long opportunityId) {
         OpportuniteEntity opportunity = opportunityService.getOpportunity(opportunityId);
         OpportunityDTO opportunityDTO = opportunityMapper.toDto(opportunity);
@@ -137,10 +128,6 @@ public class OpportunityController {
         opportunityService.save(opportunityDTO);
         return new ResponseEntity<>(opportunityService.getAll(),HttpStatus.OK);
     }
-
-
-
-
 
 }
 

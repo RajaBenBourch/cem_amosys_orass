@@ -1,20 +1,14 @@
 package com.example.crm_amosys_orass.mapper;
-
-import com.example.crm_amosys_orass.dto.ClientDTO;
 import com.example.crm_amosys_orass.dto.ProduitDTO;
-import com.example.crm_amosys_orass.model.ClientEntity;
 import com.example.crm_amosys_orass.model.ProduitEntity;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
-
 @Component
 public class ProduitMapper extends BaseMapper<ProduitEntity, ProduitDTO> {
     public ProduitMapper(ProduitEntity produit, ProduitDTO produitDto) {
         super(produit, produitDto);
     }
-
     public List<ProduitDTO> ToProduitDtos(List<ProduitEntity> produits) {
         List<ProduitDTO> dtos = new ArrayList<>();
         for (ProduitEntity produit: produits) {
@@ -34,7 +28,6 @@ public class ProduitMapper extends BaseMapper<ProduitEntity, ProduitDTO> {
         produitDto.setDescription(produit.getDescription());
         return produitDto;
     }
-
     public ProduitEntity toProduit(ProduitDTO produitDTO){
         //ProduitEntity produit = new ProduitEntity();
        // produit.setChefProduit(produitDTO.getChefProduit());

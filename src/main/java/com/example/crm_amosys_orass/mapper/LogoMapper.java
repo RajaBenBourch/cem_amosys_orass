@@ -32,7 +32,7 @@ public class LogoMapper extends BaseMapper<LogoEntity, LogoDto>{
     public LogoDto toLogoDto(LogoEntity logo) {
         LogoDto logoDto=new LogoDto();
         logoDto.setName(logo.getName());
-        logoDto.setId(logo.getId());
+        logoDto.setIdLogo(logo.getIdLogo());
         logoDto.setFils(logo.getFils());
         logoDto.setType(logo.getType());
         return logoDto;

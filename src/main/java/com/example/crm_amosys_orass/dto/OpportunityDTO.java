@@ -47,7 +47,6 @@ public class OpportunityDTO {
     public String getConcatenatedProducts() {
         return concatenatedProducts;
     }
-
     public void setConcatenatedProducts(String concatenatedProducts) {
         this.concatenatedProducts = concatenatedProducts;
     }

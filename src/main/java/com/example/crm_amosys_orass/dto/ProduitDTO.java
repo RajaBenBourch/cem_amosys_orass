@@ -16,6 +16,7 @@ public class ProduitDTO {
     private Long id;
     private Long idOpportunity;
     private Long idClient;
+    private Long idProduitClient;
 
     private String ref;
     private String libelle;
@@ -27,7 +28,6 @@ public class ProduitDTO {
     private String chefProduit;
     private String statu;
     private Date dateAchatP;
-
     private String PrixAchatProduit;
 
 

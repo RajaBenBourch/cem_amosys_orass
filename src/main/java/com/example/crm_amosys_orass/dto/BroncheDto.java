@@ -9,12 +9,8 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class LogoDto {
-    private Long idLogo;
-     //private Long idClient;
-    //private String client;
-    private String name;
-    private String type;
-    private byte[] fils;
+public class BroncheDto {
+    private long idBronch;
+    private String nomBronche;
 
 }

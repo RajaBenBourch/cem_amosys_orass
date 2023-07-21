@@ -15,18 +15,15 @@ import org.springframework.stereotype.Component;
 @Builder
 @Component
 public class LogoEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    private  Long idLogo;
     private String name;
     private String type;
     @Lob
-    @Column(name = "imagedata", length = 1000)
+    @Column(name = "imagedata", length = 1000, columnDefinition="BLOB")
     private byte[] fils;
     @OneToOne
-    @JoinColumn(name = "idClient")
-    ClientEntity client;
-
+    private  ClientEntity client;
 
 }

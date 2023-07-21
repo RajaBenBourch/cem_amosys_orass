@@ -19,19 +19,11 @@ public class ContactDTO {
 
     private long idClient;
     private long idContact;
-
     private String nomContact;
-
-
     private String roleContact;
-
-
     private Date dateCreate;
-
     private String email;
-
     private String telephone;
-
     private String fax;
 
 }
